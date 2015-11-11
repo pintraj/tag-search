@@ -1,10 +1,10 @@
 <?php
 
 /*
-        Plugin Name: PrevNav
-        Plugin URI: https://github.com/arjunsuresh/prevnav
-        Plugin Update Check URI: https://raw.github.com/arjunsuresh/prevnav/master/qa-plugin.php
-        Plugin Description: Adds nav bar to sidepanel
+        Plugin Name: AdChat
+        Plugin URI: https://github.com/arjunsuresh/chat
+        Plugin Update Check URI: https://raw.github.com/arjunsuresh/chat/master/qa-plugin.php
+        Plugin Description: Adds chat to sidepanel
         Plugin Version: 1.0
         Plugin Date: 2015-11-08
         Plugin Author: Arjun
@@ -19,10 +19,10 @@
 			exit;
 	}
 	
-	qa_register_plugin_layer('qa-prevnav-layer.php', 'Prev Nav Layer');	
+	qa_register_plugin_layer('qa-adchat-layer.php', 'Adchat Layer');	
 	
-qa_register_plugin_module('module', 'qa-prevnav-admin.php', 'qa_prevnav_admin', 'PrevNav Admin');
-	qa_register_plugin_module('widget', 'qa-prevnav-widget.php', 'qa_prevnav_widget', 'Prev Nav Widget');
+qa_register_plugin_module('module', 'qa-adchat-admin.php', 'qa_adchat_admin', 'AdChat Admin');
+	qa_register_plugin_module('widget', 'qa-adchat-widget.php', 'qa_adchat_widget', 'AdChat Widget');
 
 /*
 	Omit PHP closing tag to help avoid accidental output

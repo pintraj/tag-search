@@ -1,5 +1,5 @@
 <?php
-	class qa_prevnav_admin {
+	class qa_adchat_admin {
 		
 		function allow_template($template)
 		{
@@ -9,10 +9,10 @@
 		function option_default($option) {
 
 			switch($option) {
-				case 'prevnav_plugin_widget_title':
+				case 'adchat_plugin_widget_title':
 					return 'Previous questions';
-				case 'prevnav_plugin_css':
-					return '#qa-prevnav-buttons-container {
+				case 'adchat_plugin_css':
+					return '#qa-adchat-buttons-container {
 	background: none repeat scroll 0 0 #DDDDDD;
 	font-size: 125%;
 	font-weight: bold;
@@ -21,7 +21,7 @@
 	text-align: center;
 
 }
-.prevnav-widget-container {
+.adchat-widget-container {
 	display:inline-block;
 	position:relative;
 }';
@@ -35,16 +35,16 @@
 		//	Process form input
 
 			$ok = null;
-			if (qa_clicked('prevnav_save_button')) {
+			if (qa_clicked('adchat_save_button')) {
 				
-				qa_opt('prevnav_plugin_css',qa_post_text('prevnav_plugin_css'));
-				qa_opt('prevnav_plugin_widget_only',(bool)qa_post_text('prevnav_plugin_widget_only'));
-				qa_opt('prevnav_plugin_widget_title',qa_post_text('prevnav_plugin_widget_title'));
+				qa_opt('adchat_plugin_css',qa_post_text('adchat_plugin_css'));
+				qa_opt('adchat_plugin_widget_only',(bool)qa_post_text('adchat_plugin_widget_only'));
+				qa_opt('adchat_plugin_widget_title',qa_post_text('adchat_plugin_widget_title'));
 				
 				
 				$ok = qa_lang('admin/options_saved');
 			}
-			else if (qa_clicked('prevnav_reset_button')) {
+			else if (qa_clicked('adchat_reset_button')) {
 				foreach($_POST as $i => $v) {
 					$def = $this->option_default($i);
 					if($def !== null) qa_opt($i,$def);
@@ -63,16 +63,16 @@
 			
 			$fields[] = array(
 				'label' => 'PrevNav buttons custom css',
-				'tags' => 'NAME="prevnav_plugin_css"',
-				'value' => qa_opt('prevnav_plugin_css'),
+				'tags' => 'NAME="adchat_plugin_css"',
+				'value' => qa_opt('adchat_plugin_css'),
 				'type' => 'textarea',
 				'rows' => 20
 			);
 									
 			$fields[] = array(
 				'label' => 'Widget Title',
-				'tags' => 'NAME="prevnav_plugin_widget_title"',
-				'value' => qa_opt('prevnav_plugin_widget_title'),
+				'tags' => 'NAME="adchat_plugin_widget_title"',
+				'value' => qa_opt('adchat_plugin_widget_title'),
 			);
 
 			$fields[] = array(
@@ -91,11 +91,11 @@
 				'buttons' => array(
 					array(
 					'label' => qa_lang_html('main/save_button'),
-					'tags' => 'NAME="prevnav_save_button"',
+					'tags' => 'NAME="adchat_save_button"',
 					),
 					array(
 					'label' => qa_lang_html('admin/reset_options_button'),
-					'tags' => 'NAME="prevnav_reset_button"',
+					'tags' => 'NAME="adchat_reset_button"',
 					),
 				),
 			);
