@@ -2,8 +2,8 @@
 
 /*
         Plugin Name: PrevNav
-        Plugin URI: https://github.com/NoahY/q2a-share
-        Plugin Update Check URI: https://raw.github.com/NoahY/q2a-share/master/qa-plugin.php
+        Plugin URI: https://github.com/arjunsuresh/prevnav
+        Plugin Update Check URI: https://raw.github.com/arjunsuresh/prevnav/master/qa-plugin.php
         Plugin Description: Adds nav bar to sidepanel
         Plugin Version: 1.0
         Plugin Date: 2015-11-08
