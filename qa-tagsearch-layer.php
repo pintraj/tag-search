@@ -18,5 +18,8 @@ class qa_html_theme_layer extends qa_html_theme_base {
 		$this->output('<script async type="text/javascript" src="'.QA_HTML_THEME_LAYER_URLTOROOT.'js/tag_search.js?v=1"></script>');
 	}
 
+                       // $results=qa_get_search_results($inquery, $start, $count, $userid, false, false);
+
+
 }
 
