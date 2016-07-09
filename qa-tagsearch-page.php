@@ -41,11 +41,14 @@ class qa_tagsearch_page{
 
 		//	Perform the search if appropriate
 
-		if (strlen(qa_get('t'))) {
+		if (strlen(qa_get('q'))) {
 
 			//	Pull in input parameters
 
-			$inquery=trim(qa_get('t'));
+			$inquery=trim(qa_get('q'));
+			$num = explode('+', $inquery);
+		//	if(count($num) == 1) //just one query
+				
 			$userid=qa_get_logged_in_userid();
 			$start=qa_get_start();
 
@@ -86,7 +89,7 @@ class qa_tagsearch_page{
 
 		$qa_content=qa_content_prepare(true);
 
-		if (strlen(qa_get('t'))) {
+		if (strlen(qa_get('q'))) {
 			$qa_content['search']['value']=qa_html($inquery);
 
 			if (count($results))
