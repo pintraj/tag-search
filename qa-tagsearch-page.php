@@ -141,7 +141,7 @@ class qa_tagsearch_page{
 			}
 
 			$qa_content['page_links']=qa_html_page_links(qa_request(), $start, $pagesize, $start+$gotcount,
-					qa_opt('pages_prev_next'), array('t' => $inquery), $gotcount>=$count);
+					qa_opt('pages_prev_next'), array('q' => $inquery), $gotcount>=$count);
 
 			if (qa_opt('feed_for_search'))
 				$qa_content['feed']=array(
