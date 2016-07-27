@@ -11,6 +11,7 @@
 	
 	qa_register_plugin_module('widget', 'qa-tagsearch-widget.php', 'qa_tagsearch_widget', 'TagSearch Widget');
 	qa_register_plugin_module('page', 'qa-tagsearch-page.php', 'qa_tagsearch_page', 'TagSearch Page');
+	qa_register_plugin_module('page', 'qa-tagsearch-ajax-page.php', 'qa_tagsearch_ajax_page', 'TagSearch AJAX Page');
 
 
 	qa_register_plugin_module('module', 'qa-tagsearch-admin.php', 'qa_tagsearch_admin', 'Tag Search Admin');

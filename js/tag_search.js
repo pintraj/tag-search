@@ -1,27 +1,53 @@
+$(document).ready(function(){
+
+		$("#tag_search").click( function() { 
+
+			if(qa_tags_complete == ''){
+			$.ajax({
+type: "POST",
+url: "http://db.gateoverflow.in/qa_tagsearch_ajax_page",
+data: {ajax:"hello" },
+error: function() { 
+console.log("server: ajax error");
+},
+success: function(htmldata) {
+qa_tags_complete = htmldata;
+}
+});
+			}        
+			else {
+			}
+			});
+
+});
+
+
+
+
 function qa_tag_search_hints(skipcomplete)
 {
-        var elem=document.getElementById('search_full');
-        var html='';
-        var completed=false;
+	var elem=document.getElementById('search_full');
+	var html='';
+	var completed=false;
 
-        // first try to auto-complete
-        if (qa_tags_complete && !skipcomplete) {
-                var parts=qa_tag_typed_parts(elem);
+	// first try to auto-complete
+	if (qa_tags_complete && !skipcomplete) {
+		var parts=qa_tag_typed_parts(elem);
 
-                if (parts.typed) {
-                        html=qa_tags_to_html((qa_html_unescape(qa_tags_examples+','+qa_tags_complete)).split(','), parts.typed.toLowerCase());
-                        completed=html ? true : false;
-                }
-        }
+		if (parts.typed) {
+			html=qa_tags_to_html((qa_html_unescape(qa_tags_examples+','+qa_tags_complete)).split(','), parts.typed.toLowerCase());
+			completed=html ? true : false;
+		}
+	}
 
-        // otherwise show examples
-        if (qa_tags_examples && !completed)
-                html=qa_tags_to_html((qa_html_unescape(qa_tags_examples)).split(','), null);
+	// otherwise show examples
+	if (qa_tags_examples && !completed)
+		html=qa_tags_to_html((qa_html_unescape(qa_tags_examples)).split(','), null);
 
-        // set title visiblity and hint list
-        document.getElementById('tag_search_examples_title').style.display=(html && !completed) ? '' : 'none';
-        document.getElementById('tag_search_complete_title').style.display=(html && completed) ? '' : 'none';
-        document.getElementById('tag_search_hints').innerHTML=html;
+	// set title visiblity and hint list
+	document.getElementById('tag_search_examples_title').style.display=(html && !completed) ? '' : 'none';
+	document.getElementById('tag_search_complete_title').style.display=(html && completed) ? '' : 'none';
+	document.getElementById('tag_search_hints').innerHTML=html;
 }
 
 
@@ -33,49 +59,49 @@ function qa_tag_search_click(link)
 
 {
 
-        var elem=document.getElementById('tag_search');
+	var elem=document.getElementById('tag_search');
 
-        var parts=qa_tag_search_typed_parts(elem);
-
-
-
-        // removes any HTML tags and ampersand
-
-        var tag=qa_html_unescape(link.innerHTML.replace(/<[^>]*>/g, ''));
+	var parts=qa_tag_search_typed_parts(elem);
 
 
 
-        var separator=' ';
+	// removes any HTML tags and ampersand
+
+	var tag=qa_html_unescape(link.innerHTML.replace(/<[^>]*>/g, ''));
 
 
 
-        // replace if matches typed, otherwise append
-
-        var newvalue=(parts.typed && (tag.toLowerCase().indexOf(parts.typed.toLowerCase())>=0))
-
-                ? (parts.before+separator+tag+separator+parts.after+separator) : (elem.value+separator+tag+separator);
+	var separator=' ';
 
 
 
-        // sanitize and set value
+	// replace if matches typed, otherwise append
 
-        if (false)
+	var newvalue=(parts.typed && (tag.toLowerCase().indexOf(parts.typed.toLowerCase())>=0))
 
-                elem.value=newvalue.replace(/[\s,]*,[\s,]*/g, ', ').replace(/^[\s,]+/g, '');
-
-        else
-
-                elem.value=newvalue.replace(/[\s,]+/g, ' ').replace(/^[\s,]+/g, '');
+		? (parts.before+separator+tag+separator+parts.after+separator) : (elem.value+separator+tag+separator);
 
 
 
-        elem.focus();
+	// sanitize and set value
 
-        qa_tag_search_hints();
+	if (false)
+
+		elem.value=newvalue.replace(/[\s,]*,[\s,]*/g, ', ').replace(/^[\s,]+/g, '');
+
+	else
+
+		elem.value=newvalue.replace(/[\s,]+/g, ' ').replace(/^[\s,]+/g, '');
 
 
 
-        return false;
+	elem.focus();
+
+	qa_tag_search_hints();
+
+
+
+	return false;
 
 }
 
@@ -86,50 +112,49 @@ function qa_tag_search_hints(skipcomplete)
 
 {
 
-        var elem=document.getElementById('tag_search');
+	var elem=document.getElementById('tag_search');
 
-        var html='';
+	var html='';
 
-        var completed=false;
-
-	
-
-        // first try to auto-complete
-
-        if (qa_tags_search_complete && !skipcomplete) {
-
-                var parts=qa_tag_search_typed_parts(elem);
+	var completed=false;
 
 
 
-                if (parts.typed) {
-			html=qa_search_tags_to_html((qa_html_unescape(qa_tags_search_examples+','+qa_tags_search_complete)).split(','), parts.typed.toLowerCase());
-//			html=qa_search_tags_to_html((qa_html_unescape(qa_tags_examples+','+qa_tags_complete)).split(','), parts.typed.toLowerCase());
-                        
+	// first try to auto-complete
 
-                        completed=html ? true : false;
+	if (qa_tags_complete && !skipcomplete) {
 
-                }
-
-        }
+		var parts=qa_tag_search_typed_parts(elem);
 
 
 
-        // otherwise show examples
-
-        if (qa_tags_search_examples &&!completed)
-
-                html=qa_search_tags_to_html((qa_html_unescape('qa_tags_search_examples')).split(','), null);
+		if (parts.typed) {
+			html=qa_search_tags_to_html((qa_html_unescape(qa_tags_search_examples+','+qa_tags_complete)).split(','), parts.typed.toLowerCase());
 
 
+			completed=html ? true : false;
 
-        // set title visiblity and hint list
+		}
 
-        document.getElementById('tag_search_examples_title').style.display=(html && !completed) ? '' : 'none';
+	}
 
-        document.getElementById('tag_search_complete_title').style.display=(html && completed) ? '' : 'none';
 
-        document.getElementById('tag_search_hints').innerHTML=html;
+
+	// otherwise show examples
+
+	if (qa_tags_search_examples &&!completed)
+
+		html=qa_search_tags_to_html((qa_html_unescape('qa_tags_search_examples')).split(','), null);
+
+
+
+	// set title visiblity and hint list
+
+	document.getElementById('tag_search_examples_title').style.display=(html && !completed) ? '' : 'none';
+
+	document.getElementById('tag_search_complete_title').style.display=(html && completed) ? '' : 'none';
+
+	document.getElementById('tag_search_hints').innerHTML=html;
 
 }
 
@@ -138,63 +163,63 @@ function qa_search_tags_to_html(tags, matchlc)
 
 {
 
-        var html='';
+	var html='';
 
-        var added=0;
+	var added=0;
 
-        var tagseen={};
-
-
-
-        for (var i=0; i<tags.length; i++) {
-
-                var tag=tags[i];
-
-                var taglc=tag.toLowerCase();
+	var tagseen={};
 
 
 
-                if (!tagseen[taglc]) {
+	for (var i=0; i<tags.length; i++) {
 
-                        tagseen[taglc]=true;
+		var tag=tags[i];
 
-
-
-                        if ( (!matchlc) || (taglc.indexOf(matchlc)>=0) ) { // match if necessary
-
-                                if (matchlc) { // if matching, show appropriate part in bold
-
-                                        var matchstart=taglc.indexOf(matchlc);
-
-                                        var matchend=matchstart+matchlc.length;
-
-                                        inner='<span style="font-weight:normal;">'+qa_html_escape(tag.substring(0, matchstart))+'<b>'+
-
-                                                qa_html_escape(tag.substring(matchstart, matchend))+'</b>'+qa_html_escape(tag.substring(matchend))+'</span>';
-
-                                } else // otherwise show as-is
-
-                                        inner=qa_html_escape(tag);
+		var taglc=tag.toLowerCase();
 
 
 
-                                html+=qa_tag_search_template.replace(/\^/g, inner.replace('$', '$$$$'))+' '; // replace ^ in template, escape $s
+		if (!tagseen[taglc]) {
+
+			tagseen[taglc]=true;
 
 
 
-                                if (++added>=5)
+			if ( (!matchlc) || (taglc.indexOf(matchlc)>=0) ) { // match if necessary
 
-                                        break;
+				if (matchlc) { // if matching, show appropriate part in bold
 
-                        }
+					var matchstart=taglc.indexOf(matchlc);
 
-                }
+					var matchend=matchstart+matchlc.length;
 
-	 }
+					inner='<span style="font-weight:normal;">'+qa_html_escape(tag.substring(0, matchstart))+'<b>'+
+
+						qa_html_escape(tag.substring(matchstart, matchend))+'</b>'+qa_html_escape(tag.substring(matchend))+'</span>';
+
+				} else // otherwise show as-is
+
+					inner=qa_html_escape(tag);
 
 
 
-        return html;
+				html+=qa_tag_search_template.replace(/\^/g, inner.replace('$', '$$$$'))+' '; // replace ^ in template, escape $s
+
+
+
+				if (++added>=5)
+
+					break;
+
+			}
+
+		}
+
+	}
+
+
+
+	return html;
 
 }
 
@@ -203,39 +228,39 @@ function qa_tag_search_typed_parts(elem)
 
 {
 
-        var caret=elem.value.length-qa_tag_search_caret_from_end(elem);
+	var caret=elem.value.length-qa_tag_search_caret_from_end(elem);
 
-        var active=elem.value.substring(0, caret);
+	var active=elem.value.substring(0, caret);
 
-        var passive=elem.value.substring(active.length);
+	var passive=elem.value.substring(active.length);
 
 
 	var qa_tag_search_onlycomma = false;
-        // if the caret is in the middle of a word, move the end of word from passive to active
+	// if the caret is in the middle of a word, move the end of word from passive to active
 
-        if (
+	if (
 
-                active.match(qa_tag_search_onlycomma ? /[^\s,][^,]*$/ : /[^\s,]$/) &&
+			active.match(qa_tag_search_onlycomma ? /[^\s,][^,]*$/ : /[^\s,]$/) &&
 
-                (adjoinmatch=passive.match(qa_tag_search_onlycomma ? /^[^,]*[^\s,][^,]*/ : /^[^\s,]+/))
+			(adjoinmatch=passive.match(qa_tag_search_onlycomma ? /^[^,]*[^\s,][^,]*/ : /^[^\s,]+/))
 
-        ) {
+	   ) {
 
-                active+=adjoinmatch[0];
+		active+=adjoinmatch[0];
 
-                passive=elem.value.substring(active.length);
+		passive=elem.value.substring(active.length);
 
-        }
-
-
-
-        // find what has been typed so far
-
-        var typedmatch=active.match(qa_tag_search_onlycomma ? /[^\s,]+[^,]*$/ : /[^\s,]+$/) || [''];
+	}
 
 
 
-        return {before:active.substring(0, active.length-typedmatch[0].length), after:passive, typed:typedmatch[0]};
+	// find what has been typed so far
+
+	var typedmatch=active.match(qa_tag_search_onlycomma ? /[^\s,]+[^,]*$/ : /[^\s,]+$/) || [''];
+
+
+
+	return {before:active.substring(0, active.length-typedmatch[0].length), after:passive, typed:typedmatch[0]};
 
 }
 
@@ -243,57 +268,57 @@ function qa_tag_search_caret_from_end(elem)
 
 {
 
-        if (document.selection) { // for IE
+	if (document.selection) { // for IE
 
-                elem.focus();
+		elem.focus();
 
-                var sel=document.selection.createRange();
+		var sel=document.selection.createRange();
 
-                sel.moveStart('character', -elem.value.length);
-
-
-
-                return elem.value.length-sel.text.length;
+		sel.moveStart('character', -elem.value.length);
 
 
 
-        } else if (typeof(elem.selectionEnd)!='undefined') // other browsers
-
-                return elem.value.length-elem.selectionEnd;
+		return elem.value.length-sel.text.length;
 
 
 
-        else // by default return safest value
+	} else if (typeof(elem.selectionEnd)!='undefined') // other browsers
 
-                return 0;
+		return elem.value.length-elem.selectionEnd;
+
+
+
+	else // by default return safest value
+
+		return 0;
 
 }
 function qa_tag_search_typed_parts(elem)
 {
-        var caret=elem.value.length-qa_tag_search_caret_from_end(elem);
-        var active=elem.value.substring(0, caret);
-        var passive=elem.value.substring(active.length);
+	var caret=elem.value.length-qa_tag_search_caret_from_end(elem);
+	var active=elem.value.substring(0, caret);
+	var passive=elem.value.substring(active.length);
 	var qa_tag_search_onlycomma = false;
-        // if the caret is in the middle of a word, move the end of word from passive to active
-        if (
-                active.match(qa_tag_search_onlycomma ? /[^\s,][^,]*$/ : /[^\s,]$/) &&
-                (adjoinmatch=passive.match(qa_tag_search_onlycomma ? /^[^,]*[^\s,][^,]*/ : /^[^\s,]+/))
-        ) {
-                active+=adjoinmatch[0];
-                passive=elem.value.substring(active.length);
-        }
+	// if the caret is in the middle of a word, move the end of word from passive to active
+	if (
+			active.match(qa_tag_search_onlycomma ? /[^\s,][^,]*$/ : /[^\s,]$/) &&
+			(adjoinmatch=passive.match(qa_tag_search_onlycomma ? /^[^,]*[^\s,][^,]*/ : /^[^\s,]+/))
+	   ) {
+		active+=adjoinmatch[0];
+		passive=elem.value.substring(active.length);
+	}
 
-        // find what has been typed so far
-        var typedmatch=active.match(qa_tag_search_onlycomma ? /[^\s,]+[^,]*$/ : /[^\s,]+$/) || [''];
+	// find what has been typed so far
+	var typedmatch=active.match(qa_tag_search_onlycomma ? /[^\s,]+[^,]*$/ : /[^\s,]+$/) || [''];
 
-        return {before:active.substring(0, active.length-typedmatch[0].length), after:passive, typed:typedmatch[0]};
+	return {before:active.substring(0, active.length-typedmatch[0].length), after:passive, typed:typedmatch[0]};
 }
 function qa_html_unescape(html)
 {
-        return html.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+	return html.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 function qa_html_escape(text)
 {
-        return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
