@@ -12,7 +12,7 @@ class qa_html_theme_layer extends qa_html_theme_base {
 	{
 		qa_html_theme_base::body_suffix();
 		$this->output('<script> var qa_tags_search_examples="";');
-		$this->output('var qa_tags_complete =\'\';');
+		$this->output('if (typeof qa_tags_complete === "undefined") {var qa_tags_complete =\'\';'});
 		$template='<a href="#" class="qa-tag-link" onclick="return qa_tag_search_click(this);">^</a>';
 		$this->output('var qa_tag_search_template =\''.$template.'\';');
 		$this->output('</script>');
