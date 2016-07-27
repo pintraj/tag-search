@@ -1,29 +1,3 @@
-$(document).ready(function(){
-
-		$("#tag_search").click( function() { 
-
-			if(qa_tags_complete == ''){
-			$.ajax({
-type: "POST",
-url: "http://db.gateoverflow.in/qa_tagsearch_ajax_page",
-data: {ajax:"hello" },
-error: function() { 
-console.log("server: ajax error");
-},
-success: function(htmldata) {
-qa_tags_complete = htmldata;
-}
-});
-			}        
-			else {
-			}
-			});
-
-});
-
-
-
-
 function qa_tag_search_hints(skipcomplete)
 {
 	var elem=document.getElementById('search_full');
