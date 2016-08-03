@@ -10,18 +10,17 @@ class qa_tagsearch_admin {
 
 		switch($option) {
 			case 'tagsearch_plugin_css':
-				return '.qam-tag-search  {
-background :#1abc9c;
+return	'.qam-tag-search  {
+background :#4c9ed9;
 				}
 				.qa-tag-search {
 padding: 8px;
 	 margin-bottom: 5px;
 				}
 				.qa-tag-search-field {
-margin: 0 -40px 0 0;
 padding: 0 40px 0 5px;
 	 vertical-align: bottom;
-width: 100%;
+width: 85%;
 height: 36px;
 	border-width: 1px;
 	border-style: solid;
@@ -29,7 +28,7 @@ height: 36px;
 				}
 
 				.qa-tag-search-button {
-width: 36px;
+width: 12%;
 height: 36px;
 margin: 0!important;
 	text-indent: -9999px;
