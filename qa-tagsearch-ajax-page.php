@@ -14,7 +14,14 @@
 		
 		function suggest_requests() 
 		{
-			return null;	
+			  return array(
+                                array(
+                                        'title' => 'Tag Search Ajax Page',
+                                        'request' => 'qa_tagsearch_ajax_page',
+                                        'nav' => 'null', // 'M'=main, 'F'=footer, 'B'=before main, 'O'=opposite main, null=none
+                                     ),
+                            );
+
 		}
 		
 		function match_request($request)
