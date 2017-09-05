@@ -26,7 +26,7 @@ class qa_tagsearch_widget {
 
 
 		$out='<div class="qam-tag-search"> <div class="qa-tag-search">
-			<form method="GET" action="'.qa_path('tag-search-page').'">
+			<form method="GET" action="'.('tag-search-page').'">
 			<input type="text" name="q" id="tag_search" autocomplete="off" class="qa-tag-search-field"  placeholder="Tag Search" onkeyup="qa_tag_search_hints()" onmouseup="qa_tag_search_hints()">
 			<input type="submit" value="tagsearch" class="qa-tag-search-button"  >
 
